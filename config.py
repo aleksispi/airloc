@@ -149,4 +149,4 @@ CONFIG.MISC_save_model_iter = 5000  # How often should we save the model weights
 CONFIG.MISC_project_root_path = os.path.dirname(__file__)
 CONFIG.MISC_main_pid = os.getpid()
 
-CONFIG.MISC_dataset_path = ""  # Set accordingly
+CONFIG.MISC_dataset_path = "data"  # Set accordingly
