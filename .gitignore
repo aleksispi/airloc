@@ -1,0 +1,7 @@
+*.npy
+*.eps
+*.png
+logs/
+*__pycache__*
+*.swp
+plots/

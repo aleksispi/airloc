@@ -1,0 +1,26 @@
+{
+    "NetType": "ShareNet",
+    "Completed": true,
+    "Metrics": [
+        "Loss",
+        "ValLoss",
+        "Accuracy",
+        "ValAccuracy",
+        "ActionsTaken",
+        "ValActionsTaken",
+        "CorrectActions",
+        "ValCorrectActions"
+    ],
+    "LogDir": "/home/johnba/rl-patch-search/doerchnet/logs/2022-05-09_22-02-51-036934",
+    "Blocks": [
+        2,
+        2,
+        2
+    ],
+    "NbrParameters": 299306,
+    "LatentSpaceSize": 256,
+    "Dataset": "masa_filt",
+    "ValLoaderLength": 3,
+    "TrainLoaderLength": 13,
+    "InputSpaceSize": 6912
+}

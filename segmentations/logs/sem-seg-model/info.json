@@ -1,0 +1,25 @@
+{
+    "NetType": "UNet",
+    "Completed": false,
+    "Metrics": [
+        "Loss",
+        "ValLoss",
+        "Accuracy",
+        "ValAccuracy"
+    ],
+    "LogDir": "/home/johnba/rl-patch-search/segmentations/logs/2022-05-23_22-46-19-895557",
+    "Blocks": [
+        1,
+        1,
+        1
+    ],
+    "NbrParameters": 122098,
+    "LatentSpaceSize": [
+        1,
+        64,
+        3,
+        3
+    ],
+    "NbrImagesInTrain": 832,
+    "NbrImagesInVal": 192
+}
