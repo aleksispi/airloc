@@ -15,7 +15,7 @@ pip install -r requirements.txt
 ```
 
 ### Code structure overview
-All configurations of various models etcetera are set in `config.py`. Files related to the patch embedder is found in the folder `doerchnet`. Various logging (training statistics, final model weights, and so on) is sent to the folder `logs`.
+All configurations of various models etcetera are set in `config.py`. Files related to the patch embedder is found in the folder `doerchnet`. Various logging (training statistics, final model weights, and so on) is sent to the folder `logs`. The folder 'data' contains the data (including splits) used in the paper. When running the code the first time, first unzip all data folders.
 
 ### Training
 To pretrain the patch embedder in a self-supervised fashion a la [Doersch et al. (2015)](https://www.cv-foundation.org/openaccess/content_iccv_2015/papers/Doersch_Unsupervised_Visual_Representation_ICCV_2015_paper.pdf), run from the top level folder:
