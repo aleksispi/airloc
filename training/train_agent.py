@@ -76,7 +76,7 @@ def signalSIGUSR1Handler(*args):
 
 info = dict([
     ("AgentType" ,CONFIG.RL_agent_network),
-    ("PatchEmbedder" , CONFIG.RL_patch_embedder)
+    ("PatchEmbedder" , CONFIG.RL_patch_embedder),
     ("Completed" , False),
     ('Metrics' , [
         'Steps',
@@ -387,7 +387,7 @@ try:
 
             # Increment total iteration counter by one
             tot_itr += 1
-            if tot_ctr % CONFIG.MISC_save_model_iter:
+            if tot_itr % CONFIG.MISC_save_model_iter == 0:
                 torch.save(agent_net.state_dict(), os.path.join(CONFIG.STATS_log_dir, "model_%d" % tot_itr))
 
             # BATCH COMPLETE

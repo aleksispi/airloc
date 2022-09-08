@@ -4,7 +4,9 @@ matplotlib
 torch
 torchvision
 imageio
+tensorboard
 scikit-image
 easydict
+seaborn
 urllib3
 pandas

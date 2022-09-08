@@ -894,8 +894,6 @@ def setupLogDir( log_dir_path):
     copyfile("config.py" , os.path.join(CONFIG.STATS_scripts_dir , ".." , "config.py"))
 
     # Save Network files
-    copyfile("networks/early_rl_agents.py" , os.path.join(CONFIG.STATS_scripts_dir , "early_rl_agents.py"))
-    copyfile("networks/resnets.py" , os.path.join(CONFIG.STATS_scripts_dir, "resnets.py"))
     copyfile("networks/rnn_agents.py", os.path.join(CONFIG.STATS_scripts_dir, "rnn_agents.py"))
 
     # Save Utils files
