@@ -2,10 +2,10 @@
 
 ![airloc-img](https://user-images.githubusercontent.com/32370520/188417494-6e1ee3c3-e221-4a4a-b067-f5de1c178e0c.png)
 
-Official PyTorch implementation of AiRLoc by Aleksis Pirinen, Anton Samuelsson, John Backsund and Kalle Åström.
+Official PyTorch implementation of [AiRLoc](https://arxiv.org/abs/2209.03694) by [Aleksis Pirinen](https://www.ri.se/en/person/aleksis-pirinen), Anton Samuelsson, John Backsund and [Kalle Åström](https://www.maths.lu.se/staff/kalleastrom/).
 
 ### Installation
-The code is based on Python3.
+The code is based on Python 3.
 
 Setup Conda environment:
 ```
@@ -15,20 +15,20 @@ pip install -r requirements.txt
 ```
 
 ### Code structure overview
-All configurations of various models etcetera are set in `config.py`. Files related to the patch embedder is found in the folder `doerchnet`. Various logging (training statistics, final model weights, and so on) is sent to the folder `logs`. The folder 'data' contains the data (including splits) used in the paper. When running the code the first time, first unzip all data folders.
+All configurations of various models etcetera are set in `config.py`. Files related to the patch embedder is found in the folder `doerchnet`. Various logging (training statistics, final model weights, and so on) is sent to the folder `logs`. The folder `data` contains the data (including splits) used in the paper. When running the code the first time, first unzip all data folders.
 
 ### Training
 To pretrain the patch embedder in a self-supervised fashion a la [Doersch et al. (2015)](https://www.cv-foundation.org/openaccess/content_iccv_2015/papers/Doersch_Unsupervised_Visual_Representation_ICCV_2015_paper.pdf), run from the top level folder:
 ```
 python -m doerchnet.train
 ```
-Various statistics (including model weights) are sent to a specific subfolder in the folder `doerchnet/logs`. Within that subfolder, the weights will be called `doersch_embedder`.  
+Various statistics (including model weights) are sent to a specific subfolder in the folder `doerchnet/logs`. Within that subfolder, the weights will be called `doersch_embedder`. **Note:** This repo already includes pretrained patch embedder weights (both with and without segmentation as input), and the weights are already pointed to in `config.py` (see the flag `CONFIG.RL_pretrained_doerch_net`). Hence you may choose to skip the patch embedder pretraining step and immediately proceed to training AiRLoc (see below).
 
 To train AiRLoc, run from the top level folder:
 ```
 python -m training.train_agent
 ```
-Do not forget to point `CONFIG.RL_pretrained_doerch_net` to the pretrained patch embedder (otherwise AiRLoc will be trained with RL from scratch, which we showed in the paper to significantly reduce the success rate of the final agent). Various statistics (including model weights) are sent to the folder `logs`.
+Do not forget to point `CONFIG.RL_pretrained_doerch_net` to the pretrained patch embedder (otherwise AiRLoc will be trained with RL from scratch, which significantly reduces the success rate of the final agent). Various statistics, including model weights, are sent to the folder `logs` (if this folder does not exist it will be automatically created).
 
 To plot various statistics during training, run from the top level folder:
 ```
