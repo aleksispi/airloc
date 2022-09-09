@@ -62,7 +62,7 @@ CONFIG.RL_agent_allowed_outside = True
 CONFIG.RL_normalize_weights = True
 CONFIG.RL_eval_deterministic = True
 CONFIG.RL_priv_grid_location = False
-CONFIG.RL_priv_use_seg = False  # Set to True when training sem seg-based RL-agent (but False during inference -- should not use ground truth then!)
+CONFIG.RL_priv_use_seg = True  # Set to True when training sem seg-based RL-agent (but False during inference -- should not use ground truth then!)
 
 """
 RL Rewards
@@ -79,8 +79,8 @@ CONFIG.RL_reward_step = -1
 CONFIG.RL_LSTM_pos_emb = True
 
 # Pretrained doerch
-CONFIG.RL_pretrained_doerch_net = 'doerchnet/logs/without-sem-seg'  # without sem-seg
-#CONFIG.RL_pretrained_doerch_net = 'doerchnet/logs/with-sem-seg'  # with sem-seg
+#CONFIG.RL_pretrained_doerch_net = 'doerchnet/logs/without-sem-seg'  # without sem-seg
+CONFIG.RL_pretrained_doerch_net = 'doerchnet/logs/with-sem-seg'  # with sem-seg
 
 ######################### This is where they end #########################
 
@@ -95,7 +95,7 @@ CONFIG.RL_entropy_lower = None
 
 # Pretrained segmenter
 CONFIG.RL_pretrained_segmentation_net = 'segmentations/logs/sem-seg-model'
-CONFIG.RL_predict_seg_mask = False
+CONFIG.RL_predict_seg_mask = False  # Set to True during inference if using a sem-seg based RL-agent
 
 """
 Random Search baseline agent
