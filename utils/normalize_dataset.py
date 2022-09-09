@@ -81,14 +81,14 @@ for it, frame in enumerate(trainloader):
         img_s2s[chan_idx] += np.sum(frame[:, chan_idx, :,:] * frame[:, chan_idx, :,:])
     # Display
     if it % 100 == 0:
-        img_stds = np.sqrt(((img_s0s * img_s2s) - img_s1s * img_s1s) / (img_s0s * (img_s0s - 1)))
+        img_stds = np.sqrt(np.abs(((img_s0s * img_s2s) - img_s1s * img_s1s) / (img_s0s * (img_s0s - 1))))
         print(f"Iter {it}/{len(trainloader)}")
         print("RGB-means", img_means)
         print("RGB-stds", img_stds)
 
 dataset_path = dataset if not dataset.startswith('custom_') else os.path.join("Custom", dataset[7:])
 
-img_stds = np.sqrt(((img_s0s * img_s2s) - img_s1s * img_s1s) / (img_s0s * (img_s0s - 1)))
+img_stds = np.sqrt(np.abs(((img_s0s * img_s2s) - img_s1s * img_s1s) / (img_s0s * (img_s0s - 1))))
 stat_path = os.path.join(CONFIG.MISC_dataset_path,dataset_path,'stats.json')
 stats = {"means":list(img_means),"stds":list(img_stds)}
 
