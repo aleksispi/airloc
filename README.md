@@ -22,7 +22,7 @@ To pretrain the patch embedder in a self-supervised fashion a la [Doersch et al.
 ```
 python -m doerchnet.train
 ```
-Various statistics (including model weights) are sent to a specific subfolder in the folder `doerchnet/logs`. Within that subfolder, the weights will be called `doersch_embedder`. **Note:** This repo already includes pretrained patch embedder weights (both with and without segmentation as input), and the weights are already pointed to in `config.py` (see the flag `CONFIG.RL_pretrained_doerch_net`). Hence you may choose to skip the patch embedder pretraining step and immediately proceed to training AiRLoc (see below).
+Various statistics (including model weights) are sent to a specific subfolder in the folder `doerchnet/logs`. Within that subfolder, the weights will be called `doersch_embedder`. **Note:** This repo already includes [*Massachusetts Buildings*](https://central.bac-lac.gc.ca/.item?id=TC-OTU-35911&op=pdf&app=Library&oclc_number=1032987428)-pretrained patch embedder weights (both with and without segmentation as input) on , and the weights are already pointed to in `config.py` (see the flag `CONFIG.RL_pretrained_doerch_net`). Hence you may choose to skip the patch embedder pretraining step and immediately proceed to training AiRLoc (see below).
 
 To train AiRLoc, run from the top level folder:
 ```

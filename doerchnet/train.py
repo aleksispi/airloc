@@ -9,8 +9,6 @@ import numpy as np
 import matplotlib 
 import matplotlib.pyplot as plt
 
-from torchinfo import summary
-
 from shutil import copyfile
 from utils.utils import get_random_crops, get_deterministic_crops, load_normalize_data 
                         
@@ -307,7 +305,7 @@ try:
 
             tot_itr += 1
 
-            if tot_itr % 1000 == 0:
+            if tot_itr % 5000 == 0:
                 torch.save(net.state_dict() , os.path.join(CONFIG.STATS_DORCH_log_dir, "doerch_embedder"))
         
         # Lower the learning rate NOTE not active
