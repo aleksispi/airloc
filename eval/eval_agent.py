@@ -130,10 +130,7 @@ def main(args ):
         agent_net = RandomAgent()
     else:
         raise "Unknown RL agent selected."
-    try:
-        agent_net.load_state_dict(torch.load(os.path.join(log_base,log_dir,'final_model')))
-    except:
-        print("Warning, no final model found hopefully you are running a doerch only model.")
+    agent_net.load_state_dict(torch.load(os.path.join(log_base,log_dir,'final_model')), strict=False)
     agent_net.eval()
     agent_net = agent_net.to(device)
 

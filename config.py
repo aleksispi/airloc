@@ -10,11 +10,7 @@ import os
 import pprint
 from easydict import EasyDict as edict
 from datetime import datetime
-import socket # To Resolve host name and set path appropriatly
 
-
-# TODO: If we're to use rllib, then this may need to be uncommented.
-#from rllib.utils import rllib_get_config
 
 CONFIG = edict()
 

@@ -793,8 +793,6 @@ def _create_base_split_file( datasets_root_path = None, dataset = None, relative
 
     # Make sure only to keep relative name
     image_list = list(map(os.path.basename , image_list))
-    #image_list = list(map(lambda x: os.path.join("image" , x) ,  image_list))
-
 
     nbr_img = len(image_list)
     partition  = np.zeros(nbr_img)
@@ -809,6 +807,11 @@ def _create_base_split_file( datasets_root_path = None, dataset = None, relative
 
 if __name__ == '__main__':
     # This part is used to be able to simply generate split files for datasets
+
+    # Set random seed
+    random.seed(CONFIG.MISC_random_seed)
+    np.random.seed(CONFIG.MISC_random_seed)
+    torch.manual_seed(CONFIG.MISC_random_seed)
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset" , "-d", type = str, help = "Select dataset")
