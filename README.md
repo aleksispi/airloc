@@ -49,7 +49,7 @@ Note that `--log_dir` refers to a folder with a trained model within the `logs` 
 
 To evaluate _Priv local_, do as follows:
 1. Create a folder in `logs`, called for example `PrivLocal` (let's call it like that in the following).
-2. Copy the `doerch_embedder` weights you wish to use from the desired subfolder in `doerchnet/logs` to the created folder (`PrivLocal`). Rename `doerch_embedder` as `final_weights`.
+2. Copy the `doerch_embedder` weights you wish to use from the desired subfolder in `doerchnet/logs` to the created folder (`PrivLocal`). Rename `doerch_embedder` as `final_model`.
 3. Copy a `config.py` file into the `PrivLocal` folder, and set `CONFIG.RL_agent_network = 'Agent'`, `CONFIG.MISC_priv = True`, and `CONFIG.RL_LSTM_pos_emb = False`.
 4. Repeat the steps in the same way as described under _Evaluation_ above. Note that `--log_dir` should point to `PrivLocal`.
 
