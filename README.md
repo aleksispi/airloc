@@ -14,6 +14,8 @@ conda activate airloc
 pip install -r requirements.txt
 ```
 
+### News: Models trained on images of pre-disaster scenarios and which generalizes to post-disaster scenarios will be uploaded in the near term! These have been trained and evaluated on the [xBD dataset](https://arxiv.org/pdf/1911.09296.pdf).
+
 ### Code structure overview
 All configurations of various models etcetera are set in `config.py`. Files related to the patch embedder is found in the folder `doerchnet`. Various logging (training statistics, final model weights, and so on) is sent to the folder `logs`. The folder `data` contains the data (including splits) used in the paper. When running the code the first time, first unzip all data folders.
 
