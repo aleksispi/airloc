@@ -14,7 +14,7 @@ conda activate airloc
 pip install -r requirements.txt
 ```
 
-### News: Models trained on images of pre-disaster scenarios and which generalizes to post-disaster scenarios will be uploaded in the near term! These have been trained and evaluated on the [xBD dataset](https://arxiv.org/pdf/1911.09296.pdf).
+### News: Models trained on images of pre-disaster scenarios and which generalizes to post-disaster scenarios have been uploaded! These have been trained and evaluated on the [xBD dataset](https://arxiv.org/pdf/1911.09296.pdf). See `logs/`, where a pretrained AiRLoc model has been added for xBD, together with AiRLoc models trained on [*Massachusetts Buildings*](https://central.bac-lac.gc.ca/.item?id=TC-OTU-35911&op=pdf&app=Library&oclc_number=1032987428).
 
 ### Code structure overview
 All configurations of various models etcetera are set in `config.py`. Files related to the patch embedder is found in the folder `doerchnet`. Various logging (training statistics, final model weights, and so on) is sent to the folder `logs`. The folder `data` contains the data (including splits) used in the paper. When running the code the first time, first unzip all data folders.
@@ -24,7 +24,7 @@ To pretrain the patch embedder in a self-supervised fashion a la [Doersch et al.
 ```
 python -m doerchnet.train
 ```
-Various statistics (including model weights) are sent to a specific subfolder in the folder `doerchnet/logs`. Within that subfolder, the weights will be called `doersch_embedder`. **Note:** This repo already includes [*Massachusetts Buildings*](https://central.bac-lac.gc.ca/.item?id=TC-OTU-35911&op=pdf&app=Library&oclc_number=1032987428)-pretrained patch embedder weights (both with and without segmentation as input) on , and the weights are already pointed to in `config.py` (see the flag `CONFIG.RL_pretrained_doerch_net`). Hence you may choose to skip the patch embedder pretraining step and immediately proceed to training AiRLoc (see below).
+Various statistics (including model weights) are sent to a specific subfolder in the folder `doerchnet/logs`. Within that subfolder, the weights will be called `doersch_embedder`. **Note:** This repo already includes *Massachusetts Buildings*-pretrained patch embedder weights (both with and without segmentation as input), and the weights are already pointed to in `config.py` (see the flag `CONFIG.RL_pretrained_doerch_net`). This repo also includes xBD-pretrained embedder weights (`without-sem-seg-pre-michael`). Hence you may choose to skip the patch embedder pretraining step and immediately proceed to training AiRLoc (see below).
 
 To train AiRLoc, run from the top level folder:
 ```
@@ -37,6 +37,8 @@ To plot various statistics during training, run from the top level folder:
 python -m plot_results --log-dir <folder log path> 
 ```
 These statistics are stored in the folder `logs`.
+
+**Note:** This repo already includes *Massachusetts Buildings*-trained AiRLoc models (both with and without segmentation as input). This repo also includes an xBD-trained AiRLoc model (`2022-09-13_14-07-42-505667_pre_disaster`). Hence you may choose to skip the RL-training step and immediately proceed to evaluating AiRLoc (see below).
 
 ### Evaluation
 To evaluate an agent on the validation set of _Masschusetts Buildings_, first ensure that `CONFIG.MISC_dataset` points to 'masa_filt'. Then run from the top level folder:
