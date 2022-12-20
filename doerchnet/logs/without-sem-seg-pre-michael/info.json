@@ -1,0 +1,26 @@
+{
+    "NetType": "ShareNet",
+    "Completed": false,
+    "Metrics": [
+        "Loss",
+        "ValLoss",
+        "Accuracy",
+        "ValAccuracy",
+        "ActionsTaken",
+        "ValActionsTaken",
+        "CorrectActions",
+        "ValCorrectActions"
+    ],
+    "LogDir": "/home/aleksispi/Projects/master-theses/anton-john-spring-2022/airloc/doerchnet/logs/2022-09-13_08-43-26-264957",
+    "Blocks": [
+        2,
+        2,
+        2
+    ],
+    "NbrParameters": 299306,
+    "LatentSpaceSize": 256,
+    "Dataset": "images_post",
+    "ValLoaderLength": 4,
+    "TrainLoaderLength": 15,
+    "InputSpaceSize": 6912
+}
