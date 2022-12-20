@@ -22,7 +22,7 @@ matplotlib.use('Agg')
 import matplotlib.patches as patches
 import matplotlib.pyplot as plt
 import urllib
-from utils.dataset_utils import CustomDataset,Dubai,Masa, MasaSeven, MasaFilt, MasaFull, DubaiSeven
+from utils.dataset_utils import CustomDataset,Dubai,Masa, MasaSeven, MasaFilt, MasaFull, DubaiSeven, ImagesPre
 from dateutil.parser import parse
 
 # from torchviz import make_dot
@@ -437,6 +437,16 @@ def load_normalize_data(download=False, batch_size=16,
     elif CONFIG.MISC_dataset == 'masa_full':
         trainset = MasaFull(CONFIG.MISC_dataset_path, split='train', transform=transform_train, randomRotation=True)
         valset = MasaFull(CONFIG.MISC_dataset_path, split='val', transform=transform_val, randomRotation=True)
+    elif CONFIG.MISC_dataset == 'images_pre':
+        trainset = ImagesPre(CONFIG.MISC_dataset_path,split = 'train',transform
+                             = transform_train,use_eval_split = False)
+        valset = ImagesPre(CONFIG.MISC_dataset_path ,split=split, transform =
+                           transform_val,use_eval_split = use_eval_split)
+    elif CONFIG.MISC_dataset == 'images_post':
+        trainset = ImagesPre(CONFIG.MISC_dataset_path,split = 'train',transform
+                             = transform_train,use_eval_split = False, post_instead=True)
+        valset = ImagesPre(CONFIG.MISC_dataset_path ,split=split, transform =
+                           transform_val,use_eval_split = use_eval_split, post_instead=True)
     else:
         raise(Exception("Unknown dataset"))
     def worker_init(*args):
@@ -515,31 +525,14 @@ def visualize_trajectory(episode,
 
 
     # Draw all the possible boxes
-    for i in range(25):
-        y, x = divmod(i,5)
+    for i in range(CONFIG.MISC_game_size * CONFIG.MISC_game_size):
+        y, x = divmod(i, CONFIG.MISC_game_size)
         rect = patches.Rectangle((x * step_sz,y * step_sz),
                                  W_patches - 1,
                                  H_patches - 1,
                                  edgecolor = 'w',
                                  facecolor = 'none')
         ax.add_patch(rect)
-
-
-
-    # Draw all the possible boxes
-    for i in range(25):
-        y, x = divmod(i,5)
-        rect = patches.Rectangle((x * step_sz,y * step_sz),
-                                 W_patches - 1,
-                                 H_patches - 1,
-                                 edgecolor = 'w',
-                                 facecolor = 'none')
-        ax.add_patch(rect)
-
-
-
-
-    # Super important comment
 
     # Add start_patch and goal_patch
     # NOTE: patches.Rectangle's xy refers to y going from top to bottom, i.e. it
@@ -557,12 +550,6 @@ def visualize_trajectory(episode,
     else:
         rect_goal_color = 'g'
 
-    # rect_goal = patches.Rectangle(xy=(goal_patch[1], goal_patch[0]), width=goal_patch[3],
-    #                               height=goal_patch[2], linewidth=1.5,
-    #                               joinstyle = 'round', edgecolor=rect_goal_color, facecolor='none')
-    # rect_start = patches.Rectangle(xy=(start_patch[1], start_patch[0]), width=start_patch[3],
-    #                                height=start_patch[2], linewidth=1.5,
-    #                                joinstyle = 'round', edgecolor='b', facecolor='none')
 
     rect_goal = patches.FancyBboxPatch(xy=(goal_patch[1], goal_patch[0]),
                                        width=goal_patch[3],
@@ -590,8 +577,6 @@ def visualize_trajectory(episode,
     #add one so that the loop is correct
     if len(agent_patches.shape) == 1:
         agent_patches = agent_patches[np.newaxis, :]
-
-    # Also super importatnt comment
 
     # Add agent-selected patch(es)
     for i in range(agent_patches.shape[0]):

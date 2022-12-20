@@ -10,12 +10,14 @@ import numpy as np
 import glob
 from config import CONFIG
 import argparse
+import sys
+import time
 
 
 class DubaiSeven(Dataset):
 
     def __init__(self, dataset_root_path = CONFIG.MISC_dataset_path , split = 'train' , transform = None , generate_new_split_file = False, use_eval_split = False):
-        dataset_root_path = os.path.join(dataset_root_path , "masa_seven")
+        dataset_root_path = os.path.join(dataset_root_path , "dubai_seven")
 
         # Check if we are to use the special eval_split_file
 
@@ -726,6 +728,130 @@ class MasaFull(Dataset):
     def __len__(self):
         return len(self.image_list)
 
+class ImagesPre(Dataset):
+
+    def __init__(self, dataset_root_path = CONFIG.MISC_dataset_path , split = 'train' , transform = None , generate_new_split_file = False, use_eval_split = False, post_instead = False):
+        if post_instead:
+            dataset_root_path = os.path.join(dataset_root_path , "images_post")
+        else:
+            dataset_root_path = os.path.join(dataset_root_path , "images_pre")
+
+        # Check if we are to use the special eval_split_file
+        if use_eval_split == 'basic':
+            partition_file_path = os.path.join(dataset_root_path , "%s_eval_partition_grid_fixed_distance.csv" % split)
+            split_frame = pd.read_csv(partition_file_path)
+        elif use_eval_split == 'exhaustive':
+            partition_file_path = os.path.join(dataset_root_path , "%s_eval_partition_grid_fixed_start.csv" % split)
+            split_frame = pd.read_csv(partition_file_path)
+
+            # Check so that saved patches matches with current settings
+            #assert split_frame['patch_x'][0] == CONFIG.MISC_patch_size[0] , "
+
+        else:
+            # If grid game enabled load that file
+            if CONFIG.MISC_grid_game:
+                partition_file_path = os.path.join(dataset_root_path , "list_eval_partition_grid.csv")
+            else:
+                partition_file_path = os.path.join(dataset_root_path , "list_eval_partition.csv")
+
+            # Check if it exists
+            if not os.path.exists(partition_file_path):
+                raise(FileNotFoundError("Split file not found:\t%s" % partition_file_path))
+                exit(1)
+
+            split_frame = pd.read_csv(partition_file_path)
+
+            # Make correct split
+            if split == 'train':
+                split_frame = split_frame.loc[split_frame['partition'] == 0]
+            elif split == 'val':
+                split_frame = split_frame.loc[split_frame['partition'] == 1]
+            elif split == 'test':
+                split_frame = split_frame.loc[split_frame['partition'] == 2]
+            else:
+                print("Unknown split selected for ImagesPre:\t%s" % split)
+                exit(1)
+
+        self.image_list = split_frame['image_id'].tolist()
+        self.start_crop = split_frame[['start_x', 'start_y']].to_numpy()
+        self.goal_crop = split_frame[['goal_x' , 'goal_y']].to_numpy()
+
+        # Allow for image preprocessing by transformer
+        self.transform = transform
+
+        self.base_dir = os.path.join(dataset_root_path , "image")
+
+        # If we are to laod image segmentations aswell prepare a transform
+        if CONFIG.RL_priv_use_seg:
+            self.seg_transform = transforms.Compose([
+                transforms.ToTensor(),
+                ])
+
+    def getitem__by_image_id(self, image_id):
+        """
+            Only used for debbugging.
+        """
+        ids , start = [] , 0
+        try:
+            while (True):
+                id = self.image_list.index(image_id, start)
+                ids.append(id)
+                start = id + 1
+        except:
+            # Throws an error when no more availble
+            pass
+        if len(ids) == 0:
+            raise(Exception("No such image"))
+
+        image_path = os.path.join(self.base_dir, self.image_list[ids[0]])
+        #image = np.array(Image.open(image_path))
+        image = Image.open(image_path)
+
+        locs = [self.__getitem__(id)[1] for id in ids]
+
+        return image , np.stack(locs)
+
+    def __getitem__(self, idx):
+        image_path =  os.path.join(self.base_dir, self.image_list[idx])
+
+        image = Image.open(image_path)
+
+        if CONFIG.RL_priv_use_seg:
+            print("No semantic masks for this dataset")
+            sys.exit(0)
+
+        # If transformer available use it
+        if self.transform is not None:
+            #print("AAA", image.shape, np.min(image), np.max(image))
+            image = self.transform(image)
+            #print(type(image))
+            #print("BBB", torch.min(image), torch.max(image))
+            #time.sleep(999)
+
+        # Round labels in the image mask. They are smoothed by the interpolation
+        if CONFIG.RL_priv_use_seg:
+            seg = image[-1,:,:]
+            seg = torch.round(seg).float()
+            image[-1,:,:] = seg
+
+        # Get start and goal crop
+        start_crop = self.start_crop[idx, :]
+        goal_crop = self.goal_crop[idx ,:]
+
+        return (image , ( start_crop , goal_crop))
+
+    def __len__(self):
+        return len(self.image_list)
+
+
+    def _get_image_and_file(self, idx):
+        filepath = self.image_list[idx]
+        img = Image.open(filepath)
+        if self.transform is not None:
+            img = self.transform(img)
+
+        return (img , filepath )
+
 def _generate_split_file( split_file_path , grid_game = False):
     # Generates a separate csv file for the split with crop locations
     # Useful for creating a static validation set (or training if you want)
@@ -847,8 +973,7 @@ if __name__ == '__main__':
             plt.close('all')
 
 
-    known_datasets = ['dubai','masa','masa_filt','masa_seven','dubai_seven']
-
+    known_datasets = ['dubai','masa','masa_filt','masa_seven','dubai_seven', 'images_pre', 'images_post']
     if not args.dataset is None:
         # Check if custom or regular dataset
         if (args.dataset.startswith('custom_')):

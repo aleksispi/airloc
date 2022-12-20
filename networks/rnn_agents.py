@@ -41,6 +41,8 @@ class LSTMAgent(nn.Module):
                 self.seg_chan = 1
             elif CONFIG.MISC_dataset == 'dubai_seven':
                 self.seg_chan = 1
+            elif CONFIG.MISC_dataset == 'images_pre':
+                self.seg_chan = 1
             else:
                 raise(Exception("Use segmentation information was selected but the dataset has no segmentation info."))
         else:

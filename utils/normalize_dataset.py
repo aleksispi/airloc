@@ -8,7 +8,7 @@ import json
 import torchvision.transforms as transforms
 from torchvision.datasets import ImageFolder
 from torch.utils.data import random_split,Subset
-from utils.dataset_utils import CustomDataset, Dubai, Masa, MasaFilt, MasaFull,MasaSeven, DubaiSeven
+from utils.dataset_utils import CustomDataset, Dubai, Masa, MasaFilt, MasaFull,MasaSeven, DubaiSeven, ImagesPre
 from utils.utils import load_normalize_data
 from config import CONFIG
 
@@ -57,9 +57,16 @@ elif dataset == 'masa_seven':
 elif dataset == 'dubai_seven':
     trainset = DubaiSeven(CONFIG.MISC_dataset_path, split = 'train', transform = transform)
     n_chan = 3
+elif dataset == 'images_pre':
+    transform = transforms.Compose([transforms.ToTensor()])
+    trainset = ImagesPre(CONFIG.MISC_dataset_path, split = 'train', transform = transform)
+    n_chan = 3
+elif dataset == 'images_post':
+    transform = transforms.Compose([transforms.ToTensor()])
+    trainset = ImagesPre(CONFIG.MISC_dataset_path, split = 'train', transform = transform, post_instead=True)
+    n_chan = 3
 else:
     raise(Exception("Unknown dataset"))
-
 
 trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size, shuffle=download, num_workers=2 )
 # Calculate mean and std of pixel values in dataset
