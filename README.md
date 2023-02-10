@@ -90,3 +90,13 @@ where `<split>` is the intenteded partition of the dataset, validation is the de
 ### Grid sizes other than 5x5
 
 Note that if the dataset is intended to be used with grid sizes other than the default 5x5 the config file has to be adjusted. Change the `CONFIG.MISC_im_size` according to the desired grid size.
+
+### Citation
+If you find this implementation and/or our [paper](https://arxiv.org/abs/2209.03694) interesting or helpful, please consider citing:
+
+  @article{pirinen2022aerial,
+    title={Aerial View Goal Localization with Reinforcement Learning},
+    author={Pirinen, Aleksis and Samuelsson, Anton and Backsund, John and {\AA}str{\"o}m, Kalle},
+    journal={arXiv preprint arXiv:2209.03694},
+    year={2022}
+  }
