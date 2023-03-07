@@ -1,8 +1,8 @@
-# AiRLoc: Aerial View Goal Localization with Reinforcement Learning
+# Aerial View Localization with Reinforcement Learning: Towards Emulating Search-and-Rescue
 
 ![airloc-img](https://user-images.githubusercontent.com/32370520/188417494-6e1ee3c3-e221-4a4a-b067-f5de1c178e0c.png)
 
-Official PyTorch implementation of [AiRLoc](https://arxiv.org/abs/2209.03694) by [Aleksis Pirinen](https://www.ri.se/en/person/aleksis-pirinen), Anton Samuelsson, John Backsund and [Kalle Åström](https://www.maths.lu.se/staff/kalleastrom/).
+Official PyTorch implementation of the [Machine Learning for Remote Sensing ICLR 2023 workshop](https://nasaharvest.github.io/ml-for-remote-sensing/iclr2023/) paper _[Aerial View Localization with Reinforcement Learning: Towards Emulating Search-and-Rescue](https://arxiv.org/abs/2209.03694)_ by [Aleksis Pirinen](https://www.ri.se/en/person/aleksis-pirinen), Anton Samuelsson, John Backsund and [Kalle Åström](https://www.maths.lu.se/staff/kalleastrom/).
 
 ### Installation
 The code is based on Python 3.
@@ -13,8 +13,6 @@ conda create -n airloc
 conda activate airloc
 pip install -r requirements.txt
 ```
-
-### News: Models trained on images of pre-disaster scenarios and which generalizes to post-disaster scenarios have been uploaded! These have been trained and evaluated on the [xBD dataset](https://arxiv.org/pdf/1911.09296.pdf). See `logs/`, where a pretrained AiRLoc model has been added for xBD, together with AiRLoc models trained on [*Massachusetts Buildings*](https://central.bac-lac.gc.ca/.item?id=TC-OTU-35911&op=pdf&app=Library&oclc_number=1032987428).
 
 ### Code structure overview
 All configurations of various models etcetera are set in `config.py`. Files related to the patch embedder is found in the folder `doerchnet`. Various logging (training statistics, final model weights, and so on) is sent to the folder `logs`. The folder `data` contains the data (including splits) used in the paper. When running the code the first time, first unzip all data folders.
