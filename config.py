@@ -1,9 +1,6 @@
 """
 Central configration file for the project. Acts as a storage
 of global variables and various configuration settings.
-
-TODO TODO TODO: Remove unnecessary fields below; this is copied from an earlier
-project
 """
 
 import os
@@ -80,11 +77,11 @@ CONFIG.RL_pretrained_doerch_net = 'doerchnet/logs/with-sem-seg'  # with sem-seg
 
 ######################### This is where they end #########################
 
-CONFIG.RL_max_start_goal_dist = 8
-CONFIG.RL_min_start_goal_iou = None
-CONFIG.RL_done_iou = 0.40
+CONFIG.RL_max_start_goal_dist = 999  # Since CONFIG.MISC_grid_game=True by default --> actual max distance will become min(RL_max_start_goal_dist, grid-size - 1), i.e. 4 in 5x5, 6 in 7x7
+CONFIG.RL_min_start_goal_iou = None  # Maximum allowed IoU between a start and goal patch (this flag is not used when CONFIG.MISC_grid_game=True, as is default)
+CONFIG.RL_done_iou = 0.40  # Since CONFIG.MISC_grid_game=True by default --> the agent is done if and only if it overlaps 100% with the goal. Thus any RL_done_iou \in (0,1] works here.
 CONFIG.RL_discount_factor = 0.9
-CONFIG.RL_softmax_step_size = 1.1 # When 1 step equal non-overlapping patches
+CONFIG.RL_softmax_step_size = 1.1  # Set to 1.1 because 48x48 patches --> 1.1*48 = 52.8, with int(52.8)=52, which implies a grid setup of 48x48 patches with 4 pixel distance in between
 
 CONFIG.RL_entropy = None
 CONFIG.RL_entropy_lower = None
