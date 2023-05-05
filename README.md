@@ -15,7 +15,7 @@ pip install -r requirements.txt
 ```
 
 ### Code structure overview
-All configurations of various models etcetera are set in `config.py`. Files related to the patch embedder is found in the folder `doerchnet`. Various logging (training statistics, final model weights, and so on) is sent to the folder `logs`. The folder `data` contains the data (including splits) used in the paper. When running the code the first time, first unzip all data folders.
+All configurations of various models etcetera are set in `config.py`. Files related to the patch embedder is found in the folder `doerchnet`. Various logging (training statistics, final model weights, and so on) is sent to the folder `logs`. The folder `data` contains the data (including splits) used in the paper. Example games similar to the human performance evaluation desribed in the paper can be found in the folder `human-game`. When running the code the first time, first unzip all data folders.
 
 ### Training
 To pretrain the patch embedder in a self-supervised fashion a la [Doersch et al. (2015)](https://www.cv-foundation.org/openaccess/content_iccv_2015/papers/Doersch_Unsupervised_Visual_Representation_ICCV_2015_paper.pdf), run from the top level folder:
@@ -62,6 +62,20 @@ To evaluate _Priv local_, do as follows:
 1. Create a folder in `logs`, called for example `PrivRandom` (let's call it like that in the following).
 2. Copy a `config.py` file into the `PrivRandom` folder, and set `CONFIG.RL_agent_network = 'RandomAgent'` and `CONFIG.MISC_priv = True`.
 3. Repeat the steps in the same way as described under _Evaluation_ above. Note that `--log_dir` should point to `PrivRandom`.
+
+### Human-controlled setup for the aerial view goal localization task
+In the folder `human-game` there are ten zip-files, each representing a game setup similar to those provided to the human subjects that participated in the human performance evaluation mentioned in the paper. To play such a game with a graphical interface, simply unzip a file, move into the associated folder, and type:
+```
+python play.py
+```
+The above command will launch a warm-up phase for the game. To instead run a proper evaluation, run:
+```
+python play.py --real
+```
+To get information about various options, run:
+```
+python play.py -h
+```
 
 ### Create dataset
 
