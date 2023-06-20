@@ -2,7 +2,7 @@
 
 ![airloc-img](https://user-images.githubusercontent.com/32370520/188417494-6e1ee3c3-e221-4a4a-b067-f5de1c178e0c.png)
 
-Official PyTorch implementation of the [Machine Learning for Remote Sensing ICLR 2023 workshop](https://nasaharvest.github.io/ml-for-remote-sensing/iclr2023/) paper _[Aerial View Localization with Reinforcement Learning: Towards Emulating Search-and-Rescue](https://arxiv.org/abs/2209.03694)_ by [Aleksis Pirinen](https://www.ri.se/en/person/aleksis-pirinen), Anton Samuelsson, John Backsund and [Kalle Åström](https://www.maths.lu.se/staff/kalleastrom/).
+Official PyTorch implementation of the [Machine Learning for Remote Sensing ICLR 2023 workshop](https://nasaharvest.github.io/ml-for-remote-sensing/iclr2023/) paper _[Aerial View Localization with Reinforcement Learning: Towards Emulating Search-and-Rescue](https://arxiv.org/abs/2209.03694)_ by [Aleksis Pirinen](aleksispi.github.io), Anton Samuelsson, John Backsund and [Kalle Åström](https://www.maths.lu.se/staff/kalleastrom/).
 
 [arXiv]() | [SAIS 2023 version](https://grahn.cse.bth.se/SAIS-2023/full_papers/paper_7.pdf) | [Video](https://youtu.be/n01OCLNKxFc) | [Poster](https://drive.google.com/file/d/1qLTt_CeJLiHmr-mIEmcItw_pOJEs4Mvl/view?usp=sharing)
 
