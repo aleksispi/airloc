@@ -4,7 +4,7 @@
 
 Official PyTorch implementation of the [Machine Learning for Remote Sensing ICLR 2023 workshop](https://nasaharvest.github.io/ml-for-remote-sensing/iclr2023/) paper _[Aerial View Localization with Reinforcement Learning: Towards Emulating Search-and-Rescue](https://arxiv.org/abs/2209.03694)_ by [Aleksis Pirinen](https://aleksispi.github.io), Anton Samuelsson, John Backsund and [Kalle Åström](https://www.maths.lu.se/staff/kalleastrom/).
 
-[arXiv](https://arxiv.org/abs/2209.03694) | [SAIS 2023 version](https://ecp.ep.liu.se/index.php/sais/article/view/715) | [Video](https://youtu.be/n01OCLNKxFc) | [Poster](https://drive.google.com/file/d/1qLTt_CeJLiHmr-mIEmcItw_pOJEs4Mvl/view?usp=sharing)
+[arXiv](https://arxiv.org/abs/2209.03694) | [ML4RS workshop paper](https://raw.githubusercontent.com/nasaharvest/ml-for-remote-sensing/main/iclr2023/papers/2/CameraReady/airloc-mlrs2023-camready.pdf) | [SAIS 2023 version](https://ecp.ep.liu.se/index.php/sais/article/view/715) | [Video](https://youtu.be/n01OCLNKxFc) | [Poster](https://drive.google.com/file/d/1qLTt_CeJLiHmr-mIEmcItw_pOJEs4Mvl/view?usp=sharing)
 
 ### Installation
 The code is based on Python 3.
