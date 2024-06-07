@@ -6,6 +6,9 @@ Official PyTorch implementation of the [Machine Learning for Remote Sensing ICLR
 
 [arXiv](https://arxiv.org/abs/2209.03694) | [ML4RS workshop paper](https://raw.githubusercontent.com/nasaharvest/ml-for-remote-sensing/main/iclr2023/papers/2/CameraReady/airloc-mlrs2023-camready.pdf) | [SAIS 2023 version](https://ecp.ep.liu.se/index.php/sais/article/view/715) | [Video](https://youtu.be/n01OCLNKxFc) | [Poster](https://drive.google.com/file/d/1qLTt_CeJLiHmr-mIEmcItw_pOJEs4Mvl/view?usp=sharing)
 
+### Follow-up work
+Please also have a look at a follow-up to this work, titled [_GOMAA-Geo: GOal Modality Agnostic Active Geo-localization_](https://arxiv.org/abs/2406.01917v1). GOMAA-Geo is a generalization of AiRLoc, in that it allows for different kinds of goal specifications -- whereas AiRLoc assumes goals to be specified as aerial patches, GOMAA-Geo offers zero-shot generalization to completely different goal modalities (ground-level imagery, or natural langugage text). **Code for GOMAA-Geo** is [available here](https://github.com/mvrl/GOMAA-Geo).
+
 ### Installation
 The code is based on Python 3.
 
